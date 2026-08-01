@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://www.sugarai.com/legal/security-trust (compliance posture) and the
+  Sugar Developer Guide REST API documentation (auth, JSON, ISO 8601, pagination).
+description: >-
+  Standards and compliance posture the Sugar platform conforms to, from the
+  SugarCRM/Sugar AI security & trust page and the REST API developer
+  documentation. Certifications are program-level (platform), not per-endpoint.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: Sugar REST API authenticates with two-legged OAuth 2.0 (password + refresh_token grants).
+  - id: oidc
+    conforms: true
+    evidence: Sugar supports OIDC single sign-on for user authentication (in addition to LDAP and SAML).
+  - id: saml
+    conforms: true
+    evidence: SAML SSO supported for platform authentication.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use Sugar's own {error, error_message} JSON envelope, not application/problem+json.
+  - id: iso-27001
+    conforms: true
+    evidence: ISO/IEC 27001:2022 certified (security-trust page).
+  - id: soc2-type2
+    conforms: true
+    evidence: SOC 2 Type II reported (security-trust page).
+  - id: csa-star
+    conforms: true
+    evidence: Cloud Security Alliance STAR Registry listing (security-trust page).
+  - id: gdpr
+    conforms: true
+    evidence: GDPR compliance stated; EU-US Data Privacy Framework participation.
+  - id: ccpa
+    conforms: true
+    evidence: CCPA compliance stated (security-trust page).
+  - id: ecovadis
+    conforms: true
+    evidence: EcoVadis sustainability rating (security-trust page).

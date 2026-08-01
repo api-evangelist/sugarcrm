@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: probed
+source: live HTTP probes of SugarCRM hosts
+description: >-
+  Probe of the /.well-known/ discovery surface on the SugarCRM public hosts.
+  None of the probed documents are published (all 404). The Sugar REST API is
+  instance-hosted, so OAuth/OIDC discovery, when present, lives on a customer's
+  own Sugar deployment host rather than on the public marketing/support hosts.
+hosts:
+  - host: https://www.sugarcrm.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://support.sugarcrm.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /llms.txt, status: 404}

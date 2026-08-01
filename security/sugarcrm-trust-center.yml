@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+probe: false
+source: https://www.sugarai.com/legal/security-trust
+url: https://www.sugarai.com/legal/security-trust
+description: >-
+  SugarCRM (Sugar AI) security & compliance posture, captured from the public
+  security & trust page. The automated trust-center probe did not record this
+  because the certifications now live on the sugarai.com/legal/security-trust
+  page rather than a trust.<domain> subdomain meeting the probe's keyword
+  threshold - this is the searched, human-verified fill. Infrastructure runs on
+  AWS with documented compliance programs.
+certifications:
+  - {name: ISO/IEC 27001, year: 2022}
+  - {name: SOC 2 Type II}
+  - {name: CSA STAR, note: Cloud Security Alliance STAR Registry listing}
+  - {name: EcoVadis, note: Sustainability / ESG rating}
+compliance:
+  - GDPR
+  - CCPA
+  - EU-US Data Privacy Framework
+security_controls:
+  - Multi-factor authentication required on all systems and access points
+  - Role-based access control
+  - SSO via LDAP, SAML, and OIDC
+  - Data encrypted in transit and at rest
+status_page: https://status.cloud.sugarai.com/
+docs:
+  - https://www.sugarai.com/legal/security-trust

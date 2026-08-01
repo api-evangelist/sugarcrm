@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: searched
+source: https://support.sugarcrm.com/documentation/sugar_developer/ (Sugar Developer Guide - REST API / Authentication)
+docs: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+description: >-
+  The Sugar REST API uses two-legged OAuth 2.0. Clients POST credentials to the
+  per-instance token endpoint and receive an access_token that is sent on
+  subsequent requests in the OAuth-Token request header. Tokens are refreshed
+  with the refresh_token grant. There is no OAuth scope surface - access is
+  governed by Sugar role-based access control (ACLs) on the authenticated user,
+  not by token scopes.
+summary:
+  types: [oauth2]
+  oauth2_flows: [password, refresh_token]
+  token_header: OAuth-Token
+  scopes: none
+schemes:
+  - name: OAuth2
+    type: oauth2
+    description: Two-legged OAuth 2.0 (Resource Owner Password Credentials + refresh).
+    flows:
+      - flow: password
+        tokenUrl: https://<site_url>/rest/v11_x/oauth2/token
+        parameters:
+          grant_type: password
+          client_id: sugar        # default public client; admins may define custom client_ids
+          client_secret: ""        # empty by default
+          username: <user>
+          password: <password>
+          platform: base           # customize per integration to avoid session conflicts
+      - flow: refresh_token
+        tokenUrl: https://<site_url>/rest/v11_x/oauth2/token
+        parameters:
+          grant_type: refresh_token
+          client_id: sugar
+          refresh_token: <refresh_token>
+    response_fields: [access_token, refresh_token, download_token, expires_in]
+    request_header: OAuth-Token
+notes: >-
+  The base URL is instance-specific (https://<site_url>/rest/v{version}/), so
+  the token endpoint and API host vary per Sugar deployment. SSO to Sugar itself
+  supports LDAP, SAML and OIDC, but programmatic REST access is via the OAuth2
+  token flow above.

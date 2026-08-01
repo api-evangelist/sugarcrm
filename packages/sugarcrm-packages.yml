@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/sugarcrm and public package registries (npmjs.org, packagist.org)
+description: >-
+  First-party SugarCRM client libraries for the Sugar REST API, verified against
+  the public package registries and the SugarCRM GitHub organization
+  (github.com/sugarcrm). Ventana is the actively maintained JavaScript connector
+  used by Sugar's own Sidecar client; the PHP REST client is an older, archived
+  SDK for the v10/v11 REST API.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@sugarcrm/ventana"
+    url: https://www.npmjs.com/package/@sugarcrm/ventana
+    source: https://github.com/sugarcrm/ventana
+    install: npm install @sugarcrm/ventana
+    version: 1.1.25
+    license: Apache-2.0
+    official: true
+    description: SugarCRM REST API client (connector library across API versions).
+  - language: php
+    registry: packagist
+    name: sugarcrm/rest-php-client
+    url: https://packagist.org/packages/sugarcrm/rest-php-client
+    source: https://github.com/sugarcrm/rest-php-client
+    install: composer require sugarcrm/rest-php-client
+    license: Apache-2.0
+    official: true
+    archived: true
+    description: SDK for interacting with Sugar's REST v10 API (archived).

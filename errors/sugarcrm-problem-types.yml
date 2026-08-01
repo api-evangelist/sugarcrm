@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: searched
+source: https://support.sugarcrm.com/documentation/sugar_developer/ (Sugar Developer Guide - REST API / API Exceptions)
+format: sugar-json
+description: >-
+  Error catalog for the Sugar REST API. Sugar returns errors as a JSON envelope
+  with `error` (a machine label) and `error_message` (a human string), keyed to
+  the HTTP status. The entries below are the documented SugarApiException
+  classes and their HTTP status codes from the Sugar Developer Guide API
+  Exceptions reference. Sugar does not implement RFC 9457 problem+json.
+envelope:
+  content_type: application/json
+  fields:
+    error: Machine-readable error label.
+    error_message: Human-readable description.
+problems:
+  - status: 400
+    error: invalid_parameter
+    exception: SugarApiExceptionInvalidParameter
+    title: Invalid parameter
+    remediation: Correct the malformed or unexpected request parameter.
+  - status: 400
+    error: missing_parameter
+    exception: SugarApiExceptionMissingParameter
+    title: Missing required parameter
+    remediation: Supply the required request parameter.
+  - status: 401
+    error: need_login
+    exception: SugarApiExceptionNeedLogin
+    title: Authentication required
+    remediation: Obtain an OAuth access token and send it in the OAuth-Token header.
+  - status: 401
+    error: invalid_grant
+    exception: SugarApiExceptionInvalidGrant
+    title: Invalid or expired token / grant
+    remediation: Re-authenticate or refresh the access token.
+  - status: 403
+    error: not_authorized
+    exception: SugarApiExceptionNotAuthorized
+    title: Not authorized
+    remediation: The user's role/ACL does not permit this action; adjust permissions.
+  - status: 404
+    error: no_method
+    exception: SugarApiExceptionNoMethod
+    title: Endpoint or record not found
+    remediation: Verify the route, module name, and record id.
+  - status: 409
+    error: conflict
+    exception: SugarApiExceptionEditConflict
+    title: Edit conflict
+    remediation: The record was modified concurrently; re-fetch and retry.
+  - status: 412
+    error: metadata_out_of_date
+    exception: SugarApiExceptionMetaDataOutOfDate
+    title: Metadata hash out of date
+    remediation: Refresh client metadata (X-Metadata-Hash) before retrying.
+  - status: 422
+    error: request_method_failure
+    exception: SugarApiExceptionRequestMethodFailure
+    title: Request could not be processed
+    remediation: The request was well-formed but could not be completed as specified.
+  - status: 500
+    error: internal_server_error
+    exception: SugarApiExceptionError
+    title: Internal server error
+    remediation: Retry later; contact support if persistent.

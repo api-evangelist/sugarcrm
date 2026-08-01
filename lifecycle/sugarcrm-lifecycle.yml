@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://support.sugarcrm.com/documentation/ (Sugar Developer Guide - REST API versioning),
+  https://status.cloud.sugarai.com/ (system status)
+description: >-
+  Version lifecycle for the Sugar REST API. Sugar versions the REST API in the
+  URI path (v10 through v11_20). Older API versions remain callable for backward
+  compatibility and are retired over time; SugarCRM publishes supported versus
+  unsupported product versions in its documentation. Cloud availability is
+  reported on a public status page.
+versioning:
+  scheme: uri-path
+  pattern: /rest/v{version}/
+  range: v10 - v11_20
+  docs: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+deprecation:
+  policy: >-
+    Older REST API versions and older product releases are moved to an
+    "unsupported versions" documentation track and eventually retired; clients
+    are expected to migrate to a current v11_x version.
+  supported_versions_docs: https://support.sugarcrm.com/documentation/
+  sunset_header: false
+status_page: https://status.cloud.sugarai.com/
+sla:
+  notes: SugarCloud availability is reported publicly; contractual SLA is per subscription agreement.

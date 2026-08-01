@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: searched
+source: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+description: >-
+  Cross-cutting request/response semantics for the Sugar REST API, captured from
+  the Sugar Developer Guide. The API is JSON-native, versioned in the URI path,
+  authenticated with OAuth 2.0, and paginated with offset-based parameters.
+authentication:
+  style: oauth2
+  header: OAuth-Token
+  see: authentication/sugarcrm-authentication.yml
+versioning:
+  style: uri-path
+  pattern: /rest/v{version}/
+  range: v10 - v11_20
+  notes: The version segment is part of the request path; older versions remain callable until retired.
+  see: lifecycle/sugarcrm-lifecycle.yml
+content_type:
+  default: application/json
+  dates: ISO 8601
+pagination:
+  style: offset
+  request_params:
+    max_num: Maximum number of records to return per page.
+    offset: Starting record offset for the page.
+    order_by: Sort field and direction (e.g. date_modified:desc).
+  response_fields:
+    records: Array of returned records.
+    next_offset: Offset to request the next page (-1 when no further records).
+filtering:
+  endpoint: /{module}/filter
+  operators: ["$equals", "$not_equals", "$starts", "$contains", "$in", "$gt", "$lt", "$between", "$dateRange", "$dateBetween"]
+  notes: Filter expressions are passed as a filter[] array; date filters support timezone-aware ranges.
+field_selection:
+  param: fields
+  notes: Comma-separated field list to limit returned attributes; related data expanded via link_name in /{module}/{id}/link/{link_name}.
+error_envelope:
+  format: json
+  fields: [error, error_message]
+  see: errors/sugarcrm-problem-types.yml
+idempotency:
+  supported: false
+  notes: >-
+    The Sugar REST API does not document an idempotency-key header. Writes are
+    not de-duplicated server-side; clients must guard against retries.
+rate_limiting:
+  documented: false
+  notes: No published per-tenant REST rate-limit headers; instance capacity is deployment-dependent.
