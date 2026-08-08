@@ -10,12 +10,12 @@
     },
     {
       "source": "https://sugarclub.sugarcrm.com/",
-      "feed_url": "https://sugarclub.sugarcrm.com/rss/",
+      "feed_url": "https://sugarclub.sugarcrm.com/",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "none"
     }
   ],
   "post_count": 17,
-  "fetched": "2026-08-01T15:49:00Z"
+  "fetched": "2026-08-06T14:08:46Z"
 }
