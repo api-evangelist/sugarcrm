@@ -1,17 +1,22 @@
 aid: sugarcrm
 name: SugarCRM
 description: >-
-  SugarCRM (rebranding as Sugar AI) is a B2B sales CRM platform serving 4,000+
+  SugarCRM — rebranded as SugarAI in April 2026, with www.sugarcrm.com now
+  redirecting to www.sugarai.com — is a B2B sales CRM platform serving 4,000+
   customers and over one million users across 120+ countries. Its product suite
   spans Sugar Sell (sales automation), Sugar Serve (customer service), Sugar
   Market (marketing automation), and sales-i (sales intelligence from ERP data),
   with an emphasis on domain-specific AI that surfaces opportunities and
-  recommends next actions. Sugar exposes a REST API on every deployment at
-  https://<site_url>/rest/v{version}/ (v10 through v11_20), authenticated with
+  recommends next actions and native integration with 180+ ERP systems. Sugar
+  exposes a REST API on every deployment at https://<site_url>/rest/v{version}/
+  (v10 through v11.27 as of the 26.1 Developer Guide), authenticated with
   two-legged OAuth 2.0 and returning JSON. The API covers CRM modules (Accounts,
   Contacts, Leads, Opportunities, Cases and more) with offset pagination, a
-  /{module}/filter query surface, and role-based access control. Official client
-  libraries include the JavaScript Ventana connector and a PHP REST SDK.
+  /{module}/filter query surface, and role-based access control. Outbound events
+  are delivered as Web Logic Hooks through the instance job queue. Official
+  client libraries include the JavaScript Ventana connector and the PHP REST
+  SDK. There is no public OpenAPI — the endpoint reference is served per
+  instance at /rest/v{version}/help.
 url: https://raw.githubusercontent.com/api-evangelist/sugarcrm/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -20,20 +25,21 @@ x-backed-by:
 x-tier: stub
 x-tier-reason: portfolio-lead
 accessModel:
-  pricing: unknown
-  onboarding: self-serve
+  pricing: paid
+  onboarding: sales-assisted
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Published seat pricing, 15-user minimum, annual billing
+  confidence: high
   source:
-  - authentication
-  generated: '2026-07-22'
-  method: derived
+  - https://www.sugarai.com/pricing
+  - plans/sugarcrm-plans-pricing.yml
+  generated: '2026-08-13'
+  method: searched
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-13'
 image: https://www.sugarcrm.com/wp-content/uploads/2021/05/sugarcrm-facebook-card.png
 tags:
 - Company
@@ -44,6 +50,8 @@ tags:
 - Customer Service
 - Sales Automation
 - REST API
+- Webhooks
+- Sales Intelligence
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -53,47 +61,59 @@ apis:
 - name: Sugar REST API
   description: >-
     The Sugar REST API is hosted on each Sugar deployment at
-    https://<site_url>/rest/v{version}/ (v10 through v11_20). It authenticates
-    with two-legged OAuth 2.0 (password + refresh_token grants, OAuth-Token
-    header), returns JSON with ISO 8601 dates, uses offset pagination, and
-    exposes CRM modules through /{module} and /{module}/filter routes.
-  humanURL: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+    https://<site_url>/rest/v{version}/ (v10 through v11.27). SugarCloud
+    instances are hosted on Sugar's own sugarondemand.com domain, so a cloud
+    tenant's base is https://{instance}.sugarondemand.com/rest/v11_27/; on-site
+    deployments substitute the customer's own site URL. It authenticates with
+    two-legged OAuth 2.0 (password + refresh_token grants, OAuth-Token header),
+    returns JSON with ISO 8601 dates, uses offset pagination, and exposes CRM
+    modules through /{module} and /{module}/filter routes. Each instance serves
+    its own endpoint reference at /rest/v{version}/help; no public OpenAPI is
+    published.
+  humanURL: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
+  baseURL: https://{instance}.sugarondemand.com/rest/v11_27/
   properties:
   - type: Documentation
-    url: https://support.sugarcrm.com/documentation/sugar_developer/
+    url: https://support.sugarai.com/documentation/sugar_developer/
   - type: APIReference
-    url: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+    url: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
   - type: Authentication
     url: authentication/sugarcrm-authentication.yml
   - type: Conventions
     url: conventions/sugarcrm-conventions.yml
   - type: ErrorCatalog
     url: errors/sugarcrm-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/sugarcrm-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/sugarcrm-webhooks.yml
+  - type: Sandbox
+    url: sandbox/sugarcrm-sandbox.yml
 common:
 - type: Website
-  url: https://www.sugarcrm.com/
+  url: https://www.sugarai.com/
 - type: DeveloperPortal
-  url: https://support.sugarcrm.com/documentation/sugar_developer/
+  url: https://support.sugarai.com/documentation/sugar_developer/
 - type: Documentation
-  url: https://support.sugarcrm.com/documentation/
+  url: https://support.sugarai.com/documentation/
 - type: APIReference
-  url: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+  url: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
 - type: GettingStarted
-  url: https://support.sugarcrm.com/documentation/sugar_developer/
+  url: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/
 - type: Support
-  url: https://sugarclub.sugarcrm.com/
+  url: https://sugarclub.sugarai.com/
 - type: Blog
-  url: https://www.sugarcrm.com/blog/
+  url: https://www.sugarai.com/blog
 - type: GitHubOrganization
   url: https://github.com/sugarcrm
 - type: Pricing
-  url: https://www.sugarcrm.com/pricing/
+  url: https://www.sugarai.com/pricing
 - type: SignUp
   url: https://portal.sugarondemand.com/
 - type: TermsOfService
-  url: https://www.sugarcrm.com/legal/terms-of-use/
+  url: https://www.sugarai.com/legal/terms-of-use
 - type: PrivacyPolicy
-  url: https://www.sugarcrm.com/legal/privacy-policy/
+  url: https://www.sugarai.com/legal/privacy-policy
 - type: StatusPage
   url: https://status.cloud.sugarai.com/
 - type: Authentication
@@ -106,6 +126,8 @@ common:
   url: lifecycle/sugarcrm-lifecycle.yml
 - type: Deprecation
   url: lifecycle/sugarcrm-lifecycle.yml
+- type: ChangeLog
+  url: changelog/sugarcrm-changelog.yml
 - type: Conformance
   url: conformance/sugarcrm-conformance.yml
 - type: Compliance
@@ -114,16 +136,32 @@ common:
   url: security/sugarcrm-trust-center.yml
 - type: DomainSecurity
   url: security/sugarcrm-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/sugarcrm-vulnerability-disclosure.yml
+- type: Security
+  url: security/sugarcrm-vulnerability-disclosure.yml
+- type: SecurityTxt
+  url: well-known/sugarcrm-security.txt
 - type: Packages
   url: packages/sugarcrm-packages.yml
 - type: SDKs
   url: packages/sugarcrm-packages.yml
+- type: CLI
+  url: cli/sugarcrm-cli.yml
+- type: Plans
+  url: plans/sugarcrm-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sugarcrm-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/sugarcrm-webhooks.yml
+- type: Sandbox
+  url: sandbox/sugarcrm-sandbox.yml
 - type: WellKnown
   url: well-known/sugarcrm-well-known.yml
 - type: LLMsTxt
   url: llms/sugarcrm-llms.txt
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 10
+  artifacts_added: 9
   pass: local-v1
