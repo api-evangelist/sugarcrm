@@ -1,0 +1,76 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.sugarai.com/pricing
+description: >-
+  Published subscription pricing for the SugarAI (formerly SugarCRM) platform,
+  read from the public pricing page. Three named tiers are listed with per-user
+  list prices, all billed annually with a 15-user minimum. Pricing is
+  seat-based subscription pricing for the CRM product - the Sugar REST API is
+  included with the subscription and is not separately metered or priced, and no
+  API-specific plan, quota, or overage is published. Customized packaging is
+  available through sales.
+docs:
+  - https://www.sugarai.com/pricing
+  - https://www.sugarai.com/contact/contact-sales
+currency: USD
+billing_period: annual
+plan_count: 3
+plans:
+  - name: Standard
+    price: 59
+    currency: USD
+    unit: per user
+    period: month
+    billing: annual
+    minimum_users: 15
+    includes:
+      - Accounts & contact management
+      - Lead & opportunity management
+      - Quote management
+      - Activity management
+      - Pipeline management
+      - Business process management
+      - Reporting & analytics
+      - Mobility
+      - Basic support
+  - name: Advanced
+    price: 85
+    currency: USD
+    unit: per user
+    period: month
+    billing: annual
+    minimum_users: 15
+    includes_previous: Standard
+    includes:
+      - Mail & calendar integration
+      - Case management
+      - Bug tracking
+      - Standard support
+      - Sugar Intelligence
+      - sales-i
+      - Smart Guides
+  - name: Premier
+    price: 135
+    currency: USD
+    unit: per user
+    period: month
+    billing: annual
+    minimum_users: 15
+    includes_previous: Advanced
+    includes:
+      - Geo mapping
+      - Discover
+      - 2x file managed storage
+      - 2x data managed storage
+      - Enhanced support
+      - LinkedIn connector
+api_pricing:
+  metered: false
+  note: >-
+    No published per-call API pricing. API access is part of the platform
+    subscription; SugarCloud enforces platform-level throughput limits rather
+    than a purchased API quota - see rate-limits/sugarcrm-rate-limits.yml.
+custom_pricing:
+  available: true
+  contact: https://www.sugarai.com/contact/contact-sales
+  note: Customized packaging based on company size and requirements is offered through sales.

@@ -1,0 +1,64 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.sugarai.com/resources/sugar_cloud_sandboxes/
+description: >-
+  Sugar's test environment surface. There is NO self-serve developer sandbox, no
+  test-mode/live-mode key split, and no published test data (no test cards, no
+  hosted test tokens, no time simulation) - the Sugar REST API is instance-hosted
+  and every credential is a real user on a real Sugar instance. What Sugar does
+  publish is SugarCloud Sandboxes: licensed replica instances of a customer's own
+  production instance, provisioned by Sugar Support on request. An integration
+  developer therefore tests against a customer-licensed sandbox instance using the
+  same OAuth 2.0 password grant as production.
+docs:
+  - https://support.sugarai.com/resources/sugar_cloud_sandboxes/
+  - https://support.sugarai.com/resources/sugar_cloud_policy_guide/
+self_serve: false
+test_mode:
+  separate_keys: false
+  note: >-
+    No test/live key prefixes. Authentication is identical in sandbox and
+    production - two-legged OAuth 2.0 against the instance host. See
+    authentication/sugarcrm-authentication.yml.
+environments:
+  - name: SugarCloud Sandbox
+    type: hosted replica instance
+    provisioning: >-
+      A support-authorized contact files a case with Sugar Support requesting a
+      sandbox copy of the SugarCloud instance, supplying the desired sandbox URL
+      name and the data source.
+    host_pattern: https://{instance}.sugarondemand.com
+    host_examples:
+      - https://mycompanytest.sugarondemand.com
+      - https://mycompany-dev.sugarondemand.com
+    api_base: https://{instance}.sugarondemand.com/rest/v11_27/
+    licensing:
+      - {product: Sugar Sell Premier, sandboxes: 2}
+      - {product: Sugar Sell Advanced, sandboxes: 2}
+      - {product: Sugar Serve, sandboxes: 2}
+      - {product: Sugar Enterprise, sandboxes: 2}
+      - {product: Sugar Sell Standard, sandboxes: 1}
+      - {product: Sugar Sell Essentials, sandboxes: 0, note: purchasable as an add-on}
+    data_sources:
+      - Copy of the primary Sugar instance
+      - A backup of the Sugar instance
+      - Sugar's generic demo data
+    refresh: >-
+      Sandbox and production diverge after the snapshot; changes on either
+      instance are independent. Resetting a sandbox requires another support case.
+    limitations:
+      - '"By default, cron jobs are not set to run on sandbox environments" - so scheduled jobs, including web logic hook delivery, do not fire unless enabled (see asyncapi/sugarcrm-webhooks.yml).'
+  - name: On-site sandbox
+    type: self-hosted instance
+    provisioning: Customers can create as many on-site sandbox instances as desired.
+    licensing: {sandboxes: unlimited}
+test_data:
+  test_cards: none
+  test_tokens: none
+  time_simulation: none
+  fixtures:
+    - name: Sugar demo data
+      note: Generic demo data can be loaded when a sandbox is provisioned.
+    - name: Tidbit
+      url: https://github.com/sugarcrm/Tidbit
+      note: First-party open-source tool for generating large volumes of test data in a Sugar instance.

@@ -1,26 +1,49 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 source: >-
-  https://support.sugarcrm.com/documentation/ (Sugar Developer Guide - REST API versioning),
-  https://status.cloud.sugarai.com/ (system status)
+  https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
+  (REST API versioning), https://support.sugarai.com/resources/understanding_sugars_release_cadence/
+  (release cadence), https://status.cloud.sugarai.com/ (system status)
 description: >-
   Version lifecycle for the Sugar REST API. Sugar versions the REST API in the
-  URI path (v10 through v11_20). Older API versions remain callable for backward
-  compatibility and are retired over time; SugarCRM publishes supported versus
-  unsupported product versions in its documentation. Cloud availability is
-  reported on a public status page.
+  URI path (v10 through v11.27 as of the 26.1 Developer Guide). Older API
+  versions remain callable for backward compatibility and are retired over time;
+  SugarCRM moves superseded product documentation to an "unsupported_versions"
+  track. The PRODUCT is versioned separately on a <year>.<release>.<patch>
+  scheme (26.1.0 current, released 2026-05-19) shipping semi-annually to
+  SugarCloud and annually on-site. Cloud availability is reported on a public
+  status page. Re-read 2026-08-13 after the SugarAI rebrand moved the
+  documentation host to support.sugarai.com.
 versioning:
   scheme: uri-path
   pattern: /rest/v{version}/
-  range: v10 - v11_20
-  docs: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+  range: v10 - v11.27
+  docs: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
 deprecation:
   policy: >-
     Older REST API versions and older product releases are moved to an
     "unsupported versions" documentation track and eventually retired; clients
     are expected to migrate to a current v11_x version.
-  supported_versions_docs: https://support.sugarcrm.com/documentation/
+  supported_versions_docs: https://support.sugarai.com/documentation/
+  unsupported_versions_track: https://support.sugarai.com/documentation/unsupported_versions/
   sunset_header: false
+  deprecation_header: false
+  notes: >-
+    No RFC 8594 Sunset or Deprecation headers are emitted, and no dated API
+    retirement schedule is published - retirement is signalled by moving the
+    version's documentation to the unsupported_versions track.
 status_page: https://status.cloud.sugarai.com/
 sla:
   notes: SugarCloud availability is reported publicly; contractual SLA is per subscription agreement.
+product_releases:
+  scheme: '<Sugar_Product> <Year>.<Release>.<Patch>'
+  cadence: semi-annual on SugarCloud; annual for on-site deployments
+  current: 26.1.0
+  current_released: '2026-05-19'
+  docs: https://support.sugarai.com/resources/understanding_sugars_release_cadence/
+  see: changelog/sugarcrm-changelog.yml
+brand:
+  note: >-
+    SugarCRM rebranded to SugarAI in April 2026. www.sugarcrm.com 301s to
+    www.sugarai.com and support.sugarcrm.com 301s to support.sugarai.com; legacy
+    URLs still resolve through the redirect.

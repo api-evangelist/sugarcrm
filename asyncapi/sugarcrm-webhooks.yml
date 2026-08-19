@@ -1,0 +1,67 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/architecture/logic_hooks/web_logic_hooks/
+description: >-
+  Sugar's outbound event surface is Web Logic Hooks - administrator-configured
+  webhooks that post record and event data to an external URL when a Sugar event
+  fires on a module. Sugar publishes NO AsyncAPI document and no event streaming
+  surface; this is the webhook catalog captured from the Sugar Developer Guide
+  and Administration Guide. Delivery is asynchronous through Sugar's job queue,
+  NOT at the moment of the event: "The POST of the information to the external
+  URL will happen when the cron runs and not when the actual event occurs."
+docs:
+  - https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/architecture/logic_hooks/web_logic_hooks/
+  - https://support.sugarai.com/documentation/sugar_versions/14.0/ent/administration_guide/system/web_logic_hooks/
+asyncapi_published: false
+configuration:
+  ui: Admin > Web Logic Hooks
+  scope: per-module (Accounts, Contacts, Leads, Opportunities, Cases and other modules)
+  api: >-
+    WebLogicHooks is itself a Sugar module, so hooks can be created and managed
+    through the standard REST CRUD endpoints for that module.
+  constraint: The receiving URL should be a URL outside of the Sugar instance.
+delivery:
+  transport: http
+  request_methods: [POST, GET, PUT, DELETE]
+  content_type: application/json
+  async: true
+  mechanism: >-
+    Triggering an event creates a record in the Sugar job queue; the payload is
+    transmitted by the "Dispatch Web Logic Hook" scheduled job on the next cron
+    run. Cron must be configured and running or nothing is delivered.
+  signature: none
+  retries: undocumented
+  ordering: not guaranteed (queue + cron dispatch)
+events:
+  - name: after_save
+    description: Fires after a record in the hooked module is saved (create or update).
+  - name: after_delete
+    description: Fires after a record in the hooked module is deleted.
+  - name: after_relationship_add
+    description: Fires after a relationship is added between records.
+  - name: after_relationship_delete
+    description: Fires after a relationship is removed between records.
+  - name: after_login
+    description: Fires after a successful user login.
+  - name: after_logout
+    description: Fires after a user logs out.
+  - name: after_login_failed
+    description: Fires after a failed login attempt.
+payload:
+  format: json
+  fields:
+    isUpdate: Boolean - whether the record was updated rather than created.
+    dataChanges: Array of the modified fields.
+    bean: The module type affected.
+    data: Object carrying the full record (id, name, date_modified, assigned user, addresses, email array, custom fields).
+    event: The name of the triggering event.
+related:
+  api_hooks:
+    docs: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/architecture/logic_hooks/api_hooks/
+    note: >-
+      API Hooks (e.g. after_routing) are in-process PHP hooks that run inside the
+      Sugar instance during REST request routing - server-side extension points,
+      not an outbound event surface.
+see_also:
+  - sandbox/sugarcrm-sandbox.yml
+  - conventions/sugarcrm-conventions.yml

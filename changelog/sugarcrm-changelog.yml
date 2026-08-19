@@ -1,0 +1,76 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.sugarai.com/documentation/sugar_versions/
+description: >-
+  Sugar publishes dated release notes per product per release rather than a
+  single running API changelog. Product releases and REST API versions move
+  independently: the product moved to a <year>.<release>.<patch> scheme in 2025
+  (semi-annual for SugarCloud, annual for on-site), while the REST API is
+  versioned in the URI path and only widens its documented range (v10 - v11.27 as
+  of the 26.1 Developer Guide). Sugar does not publish a machine-readable
+  changelog feed and does not publish a per-endpoint API change log; the entries
+  below are the recent product releases whose notes carry the API-visible changes.
+docs:
+  - https://support.sugarai.com/documentation/sugar_versions/
+  - https://support.sugarai.com/resources/understanding_sugars_release_cadence/
+versioning:
+  product:
+    scheme: '<Sugar_Product> <Year>.<Release>.<Patch>'
+    example: Sugar Sell 26.1.0
+    cadence: >-
+      "Instances hosted on Sugar's cloud environment will receive two releases
+      (semi-annually) per year containing new features and fixed issues."
+      On-site instances receive new features once a year.
+    current: 26.1.0
+  api:
+    scheme: uri-path
+    pattern: /rest/v{version}/
+    range: v10 - v11.27
+    current_docs: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
+    detail: lifecycle/sugarcrm-lifecycle.yml
+entries:
+  - version: 26.1.0
+    date: '2026-05-19'
+    latest: true
+    products: [Sugar Sell, Sugar Serve, Sugar Enterprise]
+    upgrade_path: 25.2.0 to 26.1.0
+    notes: https://support.sugarai.com/documentation/sugar_versions/26.1/sell/sugar_26.1.0_release_notes/
+    highlights:
+      - System default currency configurable as a text field in Admin > Locale
+      - Scheduler "Run Order" field to prioritise concurrently scheduled jobs
+      - Accessibility - keyboard navigation and screen reader support for dashboards, pagination and record view fields
+      - Audit log pagination for large audit data sets
+      - More meaningful error messages when large-module queries time out at the database
+    breaking: []
+    note: >-
+      Sugar describes 26.1 as "one of Sugar's largest quality-focused releases",
+      an increased focus on product quality, stability and performance.
+  - version: 25.1.0
+    date: null
+    products: [Sugar Sell, Sugar Serve, Sugar Enterprise]
+    notes: https://support.sugarai.com/documentation/sugar_versions/25.1/ent/sugar_25.1.0_release_notes/
+    highlights:
+      - New UI with color-coded navigation, hover animations and a refined dark mode
+      - Built-in Package Builder and Deployer for moving configuration between instances
+      - SugarLive for Enterprise (call/chat)
+      - Sugar Market connector integrated (no separate package)
+      - Amazon OpenSearch support for full-text search
+      - Yearly recurrence for calls and meetings; failed outbound emails saved as drafts
+    breaking: []
+    note: >-
+      First release under the new <year>.<release>.<patch> numbering, replacing
+      the previous quarterly format ("15.0.0 (Q2 2025)"). Release notes do not
+      state a publication date.
+  - version: 14.0.4
+    date: null
+    products: [Sugar Serve]
+    notes: https://support.sugarai.com/documentation/sugar_versions/14.0/serve/sugar_14.0.4_release_notes/
+    highlights:
+      - Maintenance release carrying multiple security advisory fixes, including Broken Access Control issues affecting regular users
+    breaking: []
+    note: >-
+      Security fixes ship inside dated product release notes; SugarCRM also
+      issues numbered security advisories - see security/sugarcrm-vulnerability-disclosure.yml.
+feeds:
+  machine_readable: false
+  note: No RSS/Atom or JSON changelog feed is published for releases.

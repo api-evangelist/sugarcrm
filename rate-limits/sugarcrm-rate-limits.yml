@@ -1,0 +1,63 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.sugarai.com/resources/sugar_cloud_policy_guide/
+description: >-
+  Published throughput limits for the Sugar REST API on SugarCloud, taken from
+  the SugarCloud Policy Guide. Sugar enforces limits at the platform/instance
+  level rather than per API key, and states them as policy prose - it does NOT
+  document any RateLimit-* / X-RateLimit-* response headers or a documented 429
+  contract. Traffic in excess of the published rate is handled by temporary IP
+  blocking, so a client sees a connection-level failure rather than a structured
+  throttle response. On-site (self-hosted) deployments are governed by the
+  customer's own infrastructure, not by this policy.
+docs:
+  - https://support.sugarai.com/resources/sugar_cloud_policy_guide/
+  - https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
+applies_to: SugarCloud (Sugar-hosted) instances
+limit_count: 2
+limits:
+  - name: REST API requests per second (per instance)
+    scope: instance
+    metric: requests_per_second
+    limit: 20
+    window: second
+    enforcement: >-
+      "Traffic in excess of 20 requests per second" results in temporary IP
+      blocking. Exceeding the rate requires advance agreement with Sugar.
+  - name: SELECT query runtime
+    scope: instance
+    metric: query_seconds
+    limit: 120
+    window: per query
+    enforcement: SELECT queries are terminated after 120 seconds.
+headers:
+  published: false
+  note: >-
+    Sugar publishes no rate-limit response headers (no RateLimit-*,
+    X-RateLimit-*, or Retry-After contract) and no documented status code on
+    exhaustion. Excess traffic is blocked at the IP layer, which surfaces to a
+    client as a connection failure or a gateway error rather than a 429.
+response_codes:
+  throttled: null
+  note: No documented throttle status code; see headers.note.
+burst:
+  published: false
+exceeding_limits:
+  advance_notice_days: 7
+  process: >-
+    A case must be raised with Sugar Support at least "7 calendar days before the
+    increased activity is to take place", supplying start date/time, duration,
+    contact details, and agreement on limits for requests per second,
+    concurrency, and the originating IP address(es).
+related_platform_limits:
+  - name: Outbound HTTP connection timeout
+    value: under 1 second
+    note: Outbound HTTP connections from a cloud instance must have timeouts under 1 second.
+  - name: Scheduled job maximum runtime
+    value: 30 minutes
+    note: Scheduler jobs within a cloud instance are capped at 30 minutes of runtime.
+guidance:
+  - Batch API access should reuse a session rather than perform a login for every call.
+see_also:
+  - conventions/sugarcrm-conventions.yml
+  - errors/sugarcrm-problem-types.yml

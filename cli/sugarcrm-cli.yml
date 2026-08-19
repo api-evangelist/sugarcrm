@@ -1,0 +1,52 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/architecture/cli/
+description: >-
+  Sugar ships a first-party command line interface, but it is an ON-INSTANCE
+  administration tool, not an API client. The executable lives inside the Sugar
+  codebase and is run from the instance root as the web user; it executes PHP in
+  the context of the deployed Sugar instance. It cannot be installed from a
+  package registry and it does not call the REST API - an integrator working
+  against a SugarCloud instance has no CLI, only the REST API and the SDKs in
+  packages/sugarcrm-packages.yml.
+docs:
+  - https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/architecture/cli/
+  - https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/architecture/extensions/console/
+name: sugarcrm
+executable: ./bin/sugarcrm
+invocation: php bin/sugarcrm <command> [options] [arguments]
+install:
+  registry: none
+  method: >-
+    Shipped inside the Sugar application; run from the root of an on-site or
+    on-server Sugar instance. Not distributed via npm, Homebrew, PyPI or Composer.
+  remote_use: false
+  note: >-
+    Not available for SugarCloud-hosted instances, where customers have no
+    filesystem access.
+discovery:
+  - {name: list, description: Lists all available commands; supports a namespace argument and --format.}
+  - {name: help, description: Shows help for a given command.}
+commands:
+  cache:
+    - {name: aclcache, description: Dumps ACL cache contents into the cache/acldumps folder.}
+  search:
+    - {name: elastic, description: Elasticsearch management subcommands (index, queue, status).}
+    - {name: search, description: Search indexing and field management.}
+  email:
+    - {name: email, description: Email processing and batch operations.}
+  identity:
+    - {name: idm-mode, description: Identity management (IdM) mode configuration.}
+    - {name: password, description: Password hash configuration, user password reset, and compliance checking.}
+  security:
+    - {name: team-security, description: Rebuilds denormalized team security data.}
+    - {name: teamset, description: Team set backup, pruning and restoration operations.}
+extensibility:
+  note: >-
+    Custom commands are Console Commands registered through the Extension
+    Framework in ./custom/Extension/application/Ext/Console/, extending the stock
+    Command class and registered with CommandRegistry::getInstance()->addCommand().
+completion:
+  bash: ./src/Console/Resources/sugarcrm-bash-completion
+third_party:
+  note: Community CLIs exist (e.g. inetprocess/sugarcli, fayebsg/sugarcrm-cli) but are not first-party and are not catalogued here.

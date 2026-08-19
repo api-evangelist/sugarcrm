@@ -1,12 +1,17 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://github.com/sugarcrm and public package registries (npmjs.org, packagist.org)
+source: >-
+  https://github.com/sugarcrm, https://github.com/sugarcrm-developers, and the
+  public registry metadata endpoints (registry.npmjs.org, repo.packagist.org)
+  queried 2026-08-13
 description: >-
   First-party SugarCRM client libraries for the Sugar REST API, verified against
-  the public package registries and the SugarCRM GitHub organization
-  (github.com/sugarcrm). Ventana is the actively maintained JavaScript connector
-  used by Sugar's own Sidecar client; the PHP REST client is an older, archived
-  SDK for the v10/v11 REST API.
+  the public package registries and the SugarCRM GitHub organizations. Ventana is
+  the actively maintained JavaScript connector used by Sugar's own Sidecar
+  client. The PHP SDK MOVED: packagist marks sugarcrm/rest-php-client as
+  abandoned in favour of sugarcrm-developers/php-rest-client, which is the
+  currently released PHP client (1.1.1, 2026-06-17). Versions and publish dates
+  below are read from the registry metadata endpoints, not from prose.
 packages:
   - language: javascript
     registry: npm
@@ -15,16 +20,51 @@ packages:
     source: https://github.com/sugarcrm/ventana
     install: npm install @sugarcrm/ventana
     version: 1.1.25
+    published: '2026-01-19'
     license: Apache-2.0
     official: true
     description: SugarCRM REST API client (connector library across API versions).
+  - language: php
+    registry: packagist
+    name: sugarcrm-developers/php-rest-client
+    url: https://packagist.org/packages/sugarcrm-developers/php-rest-client
+    source: https://github.com/sugarcrm-developers/php-rest-client
+    install: composer require sugarcrm-developers/php-rest-client
+    version: 1.1.1
+    published: '2026-06-17'
+    license: Apache-2.0
+    official: true
+    description: An SDK for interacting with Sugar's REST v10+ API. Current PHP client.
   - language: php
     registry: packagist
     name: sugarcrm/rest-php-client
     url: https://packagist.org/packages/sugarcrm/rest-php-client
     source: https://github.com/sugarcrm/rest-php-client
     install: composer require sugarcrm/rest-php-client
+    version: 2.0.Beta.16
+    published: '2022-04-27'
     license: Apache-2.0
     official: true
     archived: true
-    description: SDK for interacting with Sugar's REST v10 API (archived).
+    abandoned: true
+    replaced_by: sugarcrm-developers/php-rest-client
+    description: >-
+      Original SDK for Sugar's REST v10 API. Packagist marks this package
+      abandoned; the last tagged release is a 2022 beta. Use the replacement.
+currency_note: >-
+  Both maintained clients have shipped releases in 2026, inside the window of the
+  current v11.27 REST API - no first-party SDK abandonment signal against the
+  live API, provided consumers move off sugarcrm/rest-php-client.
+coverage:
+  languages_covered: [javascript, php]
+  languages_missing: [python, java, ruby, go, dotnet]
+  note: >-
+    No first-party Python, Java, Go, Ruby or .NET client. Searches of PyPI,
+    RubyGems, Maven Central, NuGet and pkg.go.dev on 2026-08-13 returned no
+    SugarCRM-published API client. rubygems.org/gems/sugar_utils is a
+    SugarCRM-authored Ruby utility gem (0.8.0, 2025-03-10), not an API client,
+    so it is not listed as an SDK.
+cli:
+  note: >-
+    Sugar's first-party CLI ships inside the application rather than through a
+    registry - see cli/sugarcrm-cli.yml.

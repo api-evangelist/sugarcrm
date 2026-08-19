@@ -1,20 +1,44 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: probed
-source: live HTTP probes of SugarCRM hosts
+source: live HTTP probes of SugarCRM / SugarAI hosts
 description: >-
-  Probe of the /.well-known/ discovery surface on the SugarCRM public hosts.
-  None of the probed documents are published (all 404). The Sugar REST API is
-  instance-hosted, so OAuth/OIDC discovery, when present, lives on a customer's
-  own Sugar deployment host rather than on the public marketing/support hosts.
+  Probe of the /.well-known/ discovery surface on the SugarCRM (now SugarAI)
+  public hosts. SugarCRM rebranded to SugarAI in April 2026 and www.sugarcrm.com
+  now 301s to www.sugarai.com; the rebranded host DOES serve an RFC 9116
+  security.txt (200), which the previous round missed because it only probed the
+  legacy sugarcrm.com hosts. No OAuth/OIDC discovery documents are published on
+  the public hosts - the Sugar REST API is instance-hosted, so any OAuth metadata
+  lives on a customer's own Sugar deployment host, not on the marketing or
+  documentation hosts. An llms.txt IS published at the apex (see
+  llms/sugarcrm-llms.txt).
 hosts:
-  - host: https://www.sugarcrm.com
+  - host: https://www.sugarai.com
     documents:
-      - {path: /.well-known/security.txt, status: 404}
-      - {path: /security.txt, status: 404}
+      - {path: /.well-known/security.txt, status: 200, file: sugarcrm-security.txt}
+      - {path: /llms.txt, status: 200, file: ../llms/sugarcrm-llms.txt}
       - {path: /.well-known/openid-configuration, status: 404}
       - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
       - {path: /.well-known/ai-plugin.json, status: 404}
-  - host: https://support.sugarcrm.com
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /llms-full.txt, status: 404}
+  - host: https://www.sugarcrm.com
+    note: legacy brand host; all paths 301 to www.sugarai.com or return the marketing 404 shell
     documents:
       - {path: /.well-known/security.txt, status: 404}
       - {path: /llms.txt, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+  - host: https://support.sugarai.com
+    note: documentation host (support.sugarcrm.com 301s here)
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /llms.txt, status: 404}
+security_txt:
+  file: sugarcrm-security.txt
+  canonical: https://sugarai.com/.well-known/security.txt
+  contact: mailto:security@sugarcrm.com
+  expires: '2027-04-01T00:00:00.000Z'
+  preferred_languages: en
+  see: ../security/sugarcrm-vulnerability-disclosure.yml

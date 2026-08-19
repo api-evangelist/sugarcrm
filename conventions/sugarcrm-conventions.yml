@@ -1,10 +1,13 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://support.sugarcrm.com/documentation/sugar_developer/sugar_developer_guide_13.0/integration/web_services/rest_api/
+source: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
 description: >-
   Cross-cutting request/response semantics for the Sugar REST API, captured from
   the Sugar Developer Guide. The API is JSON-native, versioned in the URI path,
   authenticated with OAuth 2.0, and paginated with offset-based parameters.
+  Re-read 2026-08-13 against the current 26.1 guide on the rebranded
+  support.sugarai.com host (support.sugarcrm.com now 301s there): the documented
+  API version range has widened to v10 - v11.27.
 authentication:
   style: oauth2
   header: OAuth-Token
@@ -12,7 +15,7 @@ authentication:
 versioning:
   style: uri-path
   pattern: /rest/v{version}/
-  range: v10 - v11_20
+  range: v10 - v11.27
   notes: The version segment is part of the request path; older versions remain callable until retired.
   see: lifecycle/sugarcrm-lifecycle.yml
 content_type:
@@ -44,5 +47,22 @@ idempotency:
     The Sugar REST API does not document an idempotency-key header. Writes are
     not de-duplicated server-side; clients must guard against retries.
 rate_limiting:
-  documented: false
-  notes: No published per-tenant REST rate-limit headers; instance capacity is deployment-dependent.
+  documented: true
+  headers: none
+  notes: >-
+    SugarCloud publishes a platform throughput policy - 20 requests per second
+    per instance, SELECT queries terminated at 120 seconds - in the SugarCloud
+    Policy Guide, but publishes NO rate-limit response headers and no documented
+    throttle status code; excess traffic is blocked at the IP layer. On-site
+    deployments have no published limit.
+  see: rate-limits/sugarcrm-rate-limits.yml
+help_endpoint:
+  url: https://<site_url>/rest/v{version}/help
+  notes: >-
+    Each Sugar instance serves its own endpoint reference at the versioned /help
+    path. This is the closest thing Sugar publishes to a machine-readable
+    contract, and it is only reachable on a live instance - there is no public
+    OpenAPI/Swagger document.
+webhooks:
+  see: asyncapi/sugarcrm-webhooks.yml
+  notes: Outbound events are Web Logic Hooks, delivered asynchronously via the Sugar job queue on cron.

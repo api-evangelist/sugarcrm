@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://www.sugarai.com/llms.txt, https://support.sugarai.com/documentation/sugar_developer/,
+  https://github.com/sugarcrm, and MCP registry/vendor searches (2026-08-13)
+status: none
+description: >-
+  SugarCRM (SugarAI) publishes NO first-party MCP server. This artifact records
+  that absence with the evidence behind it, and is deliberately NOT wired as a
+  MCPServer pointer in apis.yml - there is no provider-operated agent surface to
+  credit. Every MCP server that exposes Sugar data today is operated by a third
+  party over Sugar's REST API. No candidate tool list was derived either: Sugar
+  publishes no OpenAPI to derive one from (the endpoint reference is the
+  per-instance /rest/v{version}/help document, which requires a live instance).
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+evidence:
+  - source: https://www.sugarai.com/llms.txt
+    status: 200
+    note: >-
+      The provider's own llms.txt enumerates products, industries, proof, blog,
+      marketplace and pricing. It names no MCP endpoint, no agent surface, and no
+      developer/API section at all.
+  - source: https://support.sugarai.com/documentation/sugar_developer/sugar_developer_guide_26.1/integration/web_services/rest_api/
+    status: 200
+    note: The current Developer Guide REST API section lists only Endpoints, Extending Endpoints and API Exceptions.
+  - source: https://github.com/sugarcrm
+    status: 200
+    note: No MCP server repository in the SugarCRM GitHub organization.
+  - source: https://www.sugarai.com/mcp
+    status: 404
+  - source: https://mcp.sugarai.com/mcp
+    status: 000
+    note: Host does not resolve.
+third_party_note: >-
+  Recorded for completeness only. These are NOT SugarCRM products and must not
+  be counted as a SugarCRM agent surface.
+third_party_servers:
+  - name: CData MCP Server for Sugar CRM
+    vendor: CData Software
+    url: https://www.cdata.com/drivers/sugarcrm/mcp/
+    mode: local-stdio
+    note: Read-only; wraps the CData JDBC driver.
+  - name: SugarAI MCP
+    vendor: Zapier
+    url: https://zapier.com/mcp/sugarcrm7
+    mode: remote
+    note: Zapier-hosted; exposes Zapier actions against Sugar, not a Sugar endpoint.
+  - name: SugarCRM MCP
+    vendor: viaSocket
+    url: https://viasocket.com/mcp/sugarcrm
+    mode: remote
+agent_surface_summary:
+  llms_txt: true          # llms/sugarcrm-llms.txt (published by the provider)
+  agent_card: false       # /.well-known/agent-card.json and /agent.json both 404
+  mcp_server: false
+  openapi: false

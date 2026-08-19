@@ -1,32 +1,34 @@
-# SugarCRM
+# SugarAI
 
-> SugarCRM (rebranding as Sugar AI) is a B2B sales CRM platform serving 4,000+ customers across 120+ countries. Its products span Sugar Sell (sales automation), Sugar Serve (customer service), Sugar Market (marketing automation), and sales-i (sales intelligence). The Sugar REST API is instance-hosted at https://<site_url>/rest/v{version}/ (v10 through v11_20), authenticated with two-legged OAuth 2.0.
+> SugarAI (formerly SugarCRM) is the Precision Selling Platform — a B2B CRM that uses AI and ERP data to help sellers know where to focus, who to engage, and what to do next. 4,000+ customers across 120+ countries.
 
-## API
-- [Sugar REST API Developer Guide](https://support.sugarcrm.com/documentation/sugar_developer/): REST endpoints, modules, filtering, and OAuth2 authentication (per-instance base URL /rest/v11_x/).
+SugarAI is built for mid-to-large B2B organizations with complex account management, large product catalogs, and repeat-purchase customer bases. It integrates natively with 180+ ERP systems to surface buying behavior changes, revenue risks, and expansion opportunities. Nucleus Research found 32% lower total cost of ownership compared to Salesforce.
 
-## Docs
-- [Documentation Portal](https://support.sugarcrm.com/documentation/): Full Sugar administration and developer documentation.
-- [Authentication](authentication/sugarcrm-authentication.yml): Two-legged OAuth 2.0 (password + refresh_token grants), OAuth-Token header.
-- [Conventions](conventions/sugarcrm-conventions.yml): JSON, ISO 8601 dates, URI-path versioning, offset pagination (max_num/offset/next_offset), /{module}/filter querying.
-- [Error Catalog](errors/sugarcrm-problem-types.yml): SugarApiException classes and HTTP status codes; {error, error_message} envelope.
-- [Lifecycle](lifecycle/sugarcrm-lifecycle.yml): URI-path versioning v10-v11_20, status page, deprecation track.
-- [Conformance](conformance/sugarcrm-conformance.yml): OAuth2/OIDC/SAML, ISO 27001:2022, SOC 2 Type II, CSA STAR, GDPR/CCPA.
+## Products
 
-## SDKs
-- [@sugarcrm/ventana (npm)](https://www.npmjs.com/package/@sugarcrm/ventana): Official JavaScript REST API client.
-- [sugarcrm/rest-php-client (Packagist)](https://packagist.org/packages/sugarcrm/rest-php-client): Official PHP SDK for the v10/v11 REST API (archived).
+- [Sugar Sell](https://sugarai.com/product/sugar-sell): AI-powered sales automation with guided selling, pipeline management, and account intelligence
+- [Sugar Sales Intelligence](https://sugarai.com/product/sugar-sales-intelligence): Revenue intelligence from ERP data — buying behavior analysis, account risk detection, and expansion opportunities
+- [Sugar Market](https://sugarai.com/product/sugar-market): Marketing automation with multi-channel campaigns, lead scoring, and analytics
+- [Sugar Serve](https://sugarai.com/product/sugar-serve): Customer service platform with case management and self-service portals
 
-## Community
-- [SugarClub Community](https://sugarclub.sugarcrm.com/): Developer and user community.
-- [SugarCRM on GitHub](https://github.com/sugarcrm): Open-source SDKs and developer tools.
-- [Marketplace](https://marketplace.sugarcrm.com/): Sugar add-ons and integrations.
+## Industries
 
-## Trust
-- [Security & Trust](https://www.sugarai.com/legal/security-trust): Compliance certifications and security controls.
-- [System Status](https://status.cloud.sugarai.com/): SugarCloud availability.
+- [Manufacturing](https://sugarai.com/industries/manufacturing): Strongest vertical — ERP integration, complex account management, repeat-purchase optimization
+- [All Industries](https://sugarai.com/industries): Also serves wholesale, distribution, financial services, software, and business services
+
+## Proof
+
+- [Case Studies](https://sugarai.com/case-studies): Customer results including +44% annual sales (Creative Foam), +1100% pipeline (Tetley), +$3.8M in 2 months (Essendant)
+- [Analyst Reports](https://sugarai.com/resources): Nucleus Research leader designation, ROI studies, ERP integration benchmarks
 
 ## Company
-- [SugarCRM](https://www.sugarcrm.com/): Company site.
-- [Pricing](https://www.sugarcrm.com/pricing/): Product pricing.
-- [Blog](https://www.sugarcrm.com/blog/): Company and product blog.
+
+- [About SugarAI](https://sugarai.com/about/about-us): Company background, mission, and history
+- [Security & Trust](https://sugarai.com/legal/security-trust): ISO 27001, SOC2 Type 2, GDPR compliance, AWS hosting
+
+## Optional
+
+- [Blog](https://sugarai.com/blog): Sales trends, product updates, and customer stories
+- [Marketplace](https://marketplace.sugarai.com): Third-party integrations and add-ons
+- [Contact Sales](https://sugarai.com/contact/contact-sales): Sales inquiries and pricing
+- [Pricing](https://sugarai.com/pricing): Custom packaging based on company size and requirements
