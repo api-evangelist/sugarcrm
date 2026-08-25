@@ -10,13 +10,19 @@
     },
     {
       "source": "https://sugarclub.sugarcrm.com/",
-      "feed_url": "https://sugarclub.sugarcrm.com/",
+      "feed_url": "https://sugarclub.sugarcrm.com/rss/",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "discovered"
+    },
+    {
+      "source": "https://sugarclub.sugarai.com/",
+      "feed_url": "https://sugarclub.sugarai.com/rss/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
   "post_count": 17,
-  "fetched": "2026-08-15T12:11:08Z"
+  "fetched": "2026-08-22T20:20:02Z"
 }
