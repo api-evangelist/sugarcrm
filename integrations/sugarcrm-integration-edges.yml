@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/sugarcrm/integrations
+- https://n8n.io/integrations/sugarcrm/
+- https://composio.dev/toolkits/sugarcrm
+- https://monid.ai/tools/sugarcrm
+checked:
+- https://composio.dev/toolkits/sugarcrm
+- https://monid.ai/tools/sugarcrm
+- https://n8n.io/integrations/sugarcrm/
+- https://zapier.com/apps/sugarcrm/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
